@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import { AppBar, Toolbar, Typography } from '@mui/material'
+import HomeComponent from './components/HomeComponent';
+import { FakeFilmData } from './shared/FakeFilmData';
 
 function App() {
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AppBar position="static" className="home-appbar">
+        <Toolbar variant="dense" className="home-toolbar">
+          <Typography variant="h6" color="white" component="div">
+            Showtimes
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <HomeComponent filmsData={FakeFilmData} />
     </div>
   );
 }
