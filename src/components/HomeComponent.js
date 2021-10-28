@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { TextField, Container, ImageList, ImageListItem, ImageListItemBar, Grid, Typography, Modal, Box, Rating } from '@mui/material'
 
 function HomeComponent() {
-    const [response, setResponse] = useState([]);
+    const [responseNowPlaying, setResponseNowPlaying] = useState([]);
+    const [responseUpcoming, setResponseUpcoming] = useState([]);
     const [query, setQuery] = useState('');
     const [queryResults, setQueryResults] = useState()
     const [open, setOpen] = useState(false);
@@ -38,7 +39,23 @@ function HomeComponent() {
                 return res.json();
             })
             .then((data) => {
-                setResponse(data.results)
+                setResponseNowPlaying(data.results)
+            })
+            .catch(err => {
+                console.error(err)
+            })
+    }, []);
+
+    useEffect(() => {
+        fetch(`https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`)
+            .then(res => {
+                if (!res.ok) {
+                    throw new Error('Network response was not OK')
+                }
+                return res.json();
+            })
+            .then((data) => {
+                setResponseUpcoming(data.results)
             })
             .catch(err => {
                 console.error(err)
@@ -87,17 +104,17 @@ function HomeComponent() {
                             />
                             <ImageListItemBar
                                 title={item.title}
-                                subtitle={<span>released: {item.release_date}</span>}
+                                subtitle={<span>released date: {item.release_date}</span>}
                                 position="below"
                             />
                         </ImageListItem>
                     )) : null : null)}
                 </ImageList>
                 <Typography variant="h5" mt={5} color="gray" component="div">
-                    Now Playing
+                    Upcoming Films
                 </Typography>
                 <ImageList sx={{}} cols={3} gap={4}>
-                    {response.map((item) => (
+                    {responseUpcoming.map((item) => (
                         <ImageListItem onClick={() => handleOpen(item)} key={item.id}>
                             <img
                                 src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
@@ -107,7 +124,27 @@ function HomeComponent() {
                             />
                             <ImageListItemBar
                                 title={item.title}
-                                subtitle={<span>released: {item.release_date}</span>}
+                                
+                                position="below"
+                            />
+                        </ImageListItem>
+                    ))}
+                </ImageList>
+                <Typography variant="h5" mt={5} color="gray" component="div">
+                    Now Playing
+                </Typography>
+                <ImageList sx={{}} cols={3} gap={4}>
+                    {responseNowPlaying.map((item) => (
+                        <ImageListItem onClick={() => handleOpen(item)} key={item.id}>
+                            <img
+                                src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
+                                srcSet={`${item.image}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                alt={`${item.title}`}
+                                loading="lazy"
+                            />
+                            <ImageListItemBar
+                                title={item.title}
+                                subtitle={<span>released date: {item.release_date}</span>}
                                 position="below"
                             />
                         </ImageListItem>
@@ -134,7 +171,7 @@ function HomeComponent() {
                         {open === true ? truncateString(openedMovieObject.overview, 200): ""}
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 1 }}>
-                        {`released: ${openedMovieObject.release_date}`}
+                        {`released date: ${openedMovieObject.release_date}`}
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 1 }}>
                         {`original language: ${openedMovieObject.original_language}`}
