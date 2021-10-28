@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { TextField, Container, ImageList, ImageListItem, ImageListItemBar, Grid } from '@mui/material'
+import { TextField, Container, ImageList, ImageListItem, ImageListItemBar, Grid, Typography } from '@mui/material'
 
 function HomeComponent() {
     const [response, setResponse] = useState([]);
@@ -20,6 +20,7 @@ function HomeComponent() {
             })
             .then((data) => {
                 setQueryResults(data.results)
+                console.log(data.results)
             })
             .catch(err => {
                 console.error(err)
@@ -42,17 +43,42 @@ function HomeComponent() {
             })
     }, []);
 
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
     return (
-        < Container >
-            <TextField className="search-films-text-field" onChange={handleChange} id="filled-basic" label="search now playing" variant="filled" margin="dense" fullWidth />
-            <Grid container justifyContent="center">
-                <ImageList sx={{ width: '60%', height: '40%', }} cols={2} gap={8}>
-                    {(query.length !== 0 ? queryResults === undefined ? response : queryResults : response).map((item) => (
+        < Container justifyContent="center">
+            <TextField className="search-films-text-field" onChange={handleChange} id="filled-basic" label="search films" variant="filled" margin="dense" fullWidth />
+            <Grid container >
+
+                <ImageList sx={{}} cols={3} gap={4}>
+                    {(query.length !== 0 ? queryResults !== undefined ? queryResults.map((item) => (
                         <ImageListItem onClick={() => console.log(item.title)} key={item.id}>
                             <img
-                                src={`https://image.tmdb.org/t/p/w400/${item.poster_path}`}
+                                src={item.poster_path !== null ? `https://image.tmdb.org/t/p/w400/${item.poster_path}` : `https://media.istockphoto.com/vectors/no-image-available-icon-vector-id1216251206?k=20&m=1216251206&s=170667a&w=0&h=A72dFkHkDdSfmT6iWl6eMN9t_JZmqGeMoAycP-LMAw4=`}
                                 srcSet={`${item.image}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                                alt={item.title}
+                                alt={`${item.title}`}
+                                loading="lazy"
+                            />
+                            <ImageListItemBar
+                                title={item.title}
+                                subtitle={<span>released: {item.release_date}</span>}
+                                position="below"
+                            />
+                        </ImageListItem>
+                    )) : null : null)}
+                </ImageList>
+                <Typography variant="h5" mt={5} color="gray" component="div">
+                    Now Playing
+                </Typography>
+                <ImageList sx={{}} cols={3} gap={4}>
+                    {response.map((item) => (
+                        <ImageListItem onClick={() => console.log(item.title)} key={item.id}>
+                            <img
+                                src={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
+                                srcSet={`${item.image}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                                alt={`${item.title}`}
                                 loading="lazy"
                             />
                             <ImageListItemBar
