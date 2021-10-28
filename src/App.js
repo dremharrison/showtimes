@@ -1,9 +1,7 @@
 import './App.css';
 import { AppBar, Toolbar, Typography } from '@mui/material'
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import HomeComponent from './components/HomeComponent';
 import { FakeFilmData } from './shared/FakeFilmData';
-import FilmComponent from './components/FilmComponent';
 
 function App() {
 
@@ -16,17 +14,7 @@ function App() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/">
-            <HomeComponent filmsData={FakeFilmData} />
-          </Route>
-          <Route path="/film">
-            <FilmComponent />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-
+      <HomeComponent filmsData={FakeFilmData} />
     </div>
   );
 }
