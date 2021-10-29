@@ -3,10 +3,34 @@
 }
 
 .home-toolbar {
-  background: gray;
+  background: black;
+}
+
+.zip-code-search-textfield {
+  border-color: aliceblue;
+  background-color: aliceblue;
+  border-radius: 8px;
 }
 
 .search-films-text-field {
-  
-  /* width: 60%; */
+  border-color: aliceblue;
+  background-color: aliceblue;
+  border-radius: 4px;
+}
+
+.home-side-conatiner {
+  background-color: "#81AF1A"
+}
+
+.promotion-logo-img-container {
+  width: auto;
+  display: flex;
+  justify-content: space-around;
+  padding: 5px;
+}
+
+.upcoming-image-list {
+  display: 'flex';
+  flex-direction: 'row';
+  padding: 0;
 }
