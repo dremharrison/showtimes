@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { TextField, Container, ImageList, ImageListItem, ImageListItemBar, Grid, Typography, Modal, Box, Rating } from '@mui/material'
-import PromotionComponent from './PromotionComponent';
+import { ImageList, ImageListItem, ImageListItemBar, Grid, Typography, Modal, Box, Rating } from '@mui/material'
 
 function UpcomingFilmsComponent() {
     const [responseUpcoming, setResponseUpcoming] = useState([]);

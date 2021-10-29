@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { TextField, Container, ImageList, ImageListItem, ImageListItemBar, Grid, Typography, Modal, Box, Rating } from '@mui/material'
+import { TextField, ImageList, ImageListItem, ImageListItemBar, Grid, Typography, Modal, Box, Rating } from '@mui/material'
 
 function SearchFilmsComponent() {
     const [query, setQuery] = useState('');

@@ -8,9 +8,8 @@ const PromotionComponent = ({ movieTitle, movieLogo, movieVideo }) => {
                 <img width="500" className="promotion-logo" alt={`${movieTitle} logo`} src={movieLogo} />
             </div>
             <div>
-                <iframe width="560" height="315" src={movieVideo} frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe width="560" height="315" src={movieVideo} frameborder="0" title="promotion-video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-
         </Container>
     )
 }
