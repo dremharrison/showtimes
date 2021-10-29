@@ -5,7 +5,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { LocationOn, MyLocation } from '@mui/icons-material';
+import { LocationOn, Search } from '@mui/icons-material';
 
 const HeaderComponent = () => {
     return (
@@ -32,7 +32,7 @@ const HeaderComponent = () => {
                     <TextField className="zip-code-search-textfield" id="filled-basic" label="search by zip code" variant="filled" size="small" InputProps={{
                         endAdornment: (
                             <InputAdornment position="end">
-                                <MyLocation />
+                                <Search />
                             </InputAdornment>
                         ),
                     }} />

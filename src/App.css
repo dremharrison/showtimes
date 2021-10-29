@@ -22,7 +22,7 @@
   background-color: "#81AF1A"
 }
 
-.promotion-logo-img-container {
+#promotion-container {
   width: auto;
   display: flex;
   justify-content: space-around;
